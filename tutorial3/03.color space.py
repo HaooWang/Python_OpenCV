@@ -12,6 +12,36 @@ import cv2 as cv
 import numpy as np
 
 
+# get image or video information
+def get_image_info(image):
+	print('image.shape:', image.shape)
+	print('image type:', type(image))
+	print('image size:', image.size)
+
+
+###################
+# image color space transformation
+
+def color_space(image):
+	gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+	cv.imshow("RGB To Gray", gray)
+	hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
+	cv.imshow("RGB To HSV", hsv)
+	yuv = cv.cvtColor(image, cv.COLOR_BGR2YUV)
+	cv.imshow("YUV", yuv)
+	ycrcb = cv.cvtColor(image, cv.COLOR_BGR2YCrCb)
+	cv.imshow("YCrCb", ycrcb)
+
+
+# native feature extraction
+def feature_extraction(image):
+	hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
+	lower_hsv = np.array([0, 0, 0])
+	upper_hsv = np.array([180, 255, 46])
+	mask = cv.inRange(image, lowerb=lower_hsv, upperb=upper_hsv)
+	return mask
+
+
 def vedio_cap():
 	# initialization
 	keep_processing = True
@@ -19,7 +49,8 @@ def vedio_cap():
 	# define video capture object
 	cap = cv.VideoCapture()
 	# define display window name
-	windowName = "Live Camera Input"
+	windowNameInit = "Live Camera Input"
+	windowNameProc = "Processed Camera Vedio"
 	# if command line arguments are provided try to read video_name
 	# otherwise default to capture from attached H/W camera
 	
@@ -27,7 +58,9 @@ def vedio_cap():
 			or (cap.open(camera_to_use))):
 		
 		# create window by name (note flags for resizable or not)
-		cv.namedWindow(windowName, cv.WINDOW_NORMAL)
+		cv.namedWindow(windowNameInit, cv.WINDOW_NORMAL)
+		cv.namedWindow(windowNameProc, cv.WINDOW_NORMAL)
+		
 		while (keep_processing):
 			# error detection #
 			if (cap.isOpened):
@@ -36,8 +69,11 @@ def vedio_cap():
 			# start a timer (to see how long processing and display takes)
 			start_t = cv.getTickCount()
 			frame = cv.flip(frame, 1)
-			# display image
-			cv.imshow(windowName, frame)
+			mask = feature_extraction(frame)
+			
+			# display vedio
+			cv.imshow(windowNameInit, frame)
+			cv.imshow(windowNameProc, mask)
 			# stop the timer and convert to ms. (to see how long processing and display takes)
 			stop_t = ((cv.getTickCount() - start_t) / cv.getTickFrequency()) * 1000
 			# wait 40ms or less depending on processing time taken (i.e. 1000ms / 25 fps = 40 ms)
@@ -53,27 +89,20 @@ def vedio_cap():
 				print("-- key == ord('x') --")
 		
 		# close all windows
-		cv.destroyWindow(windowName)
-
-
-def get_image_info(image):
-	print(image.shape)
-	print(type(image))
-	print(image.size)
+		cv.destroyWindow(windowNameInit)
+		cv.destroyWindow(windowNameProc)
 
 
 print("--------- Information ------")
-src = cv.imread("E:/Pycharm Projects/Python_OpenCV/pictures/lena.png")
-cv.namedWindow("Input Image", cv.WINDOW_AUTOSIZE)
-cv.imshow("Input Image", src)
 # initial tick counter t1
-
 t1 = cv.getTickCount()
-get_image_info(src)
+# processing
+vedio_cap()
 
 # tick counter t2
 t2 = cv.getTickCount()
-time = (t2 - t1)/cv.getTickFrequency() *1000
+time = (t2 - t1) / cv.getTickFrequency() * 1000
+
 print("Time consumption during this process : {} ms.".format(time))
 cv.waitKey(0)
 
