@@ -71,7 +71,7 @@ def access_pixels(image):
 			for channel in range(channels):
 				pix = image[row, col, channel]
 				image[row, col, channel] = 255 - pix
-	cv.imwrite("E:/Pycharm Projects/Python_OpenCV/pictures/negativeLena.png", image)
+	cv.imwrite("/Users/haowang/AI/Python_OpenCV/pictures/lena.png", image)
 	cv.imshow("access_pixels", image)
 
 
@@ -93,7 +93,7 @@ def inverse(image):
 
 
 print("-----Image Information")
-src = cv.imread("E:/Pycharm Projects/Python_OpenCV/pictures/lena.png")  # B + G + R = 3 channels
+src = cv.imread("/Users/haowang/AI/Python_OpenCV/pictures/lena.png")  # B + G + R = 3 channels
 cv.namedWindow("Input Image", cv.WINDOW_AUTOSIZE)
 cv.imshow("Input Image", src)
 gray = cv.cvtColor(src, cv.COLOR_BGR2GRAY)
