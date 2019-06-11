@@ -57,17 +57,17 @@ def vedio_cap():
 
 
 def get_image_info(image):
+	print(image.shape[:2])
 	print(image.shape)
 	print(type(image))
 	print(image.size)
 
 
 print("--------- Information ------")
-src = cv.imread("E:/Pycharm Projects/Python_OpenCV/pictures/lena.png")
+src = cv.imread("/Users/haowang/ML_CV_Py_worksapce/Python_OpenCV/pictures/coins.jpg")
 cv.namedWindow("Input Image", cv.WINDOW_AUTOSIZE)
-cv.imshow("Input Image", src)
 get_image_info(src)
-vedio_cap()
+# vedio_cap()
 cv.waitKey(0)
 
 # destroy all windows
