@@ -68,11 +68,11 @@ def vedio_cap():
 			
 			# start a timer (to see how long processing and display takes)
 			start_t = cv.getTickCount()
-			frame = cv.flip(frame, 1)
-			mask = feature_extraction(frame)
+			flip_frame = cv.flip(frame, -1)
+			mask = feature_extraction(flip_frame)
 			
 			# display vedio
-			cv.imshow(windowNameInit, frame)
+			cv.imshow(windowNameInit, flip_frame)
 			cv.imshow(windowNameProc, mask)
 			# stop the timer and convert to ms. (to see how long processing and display takes)
 			stop_t = ((cv.getTickCount() - start_t) / cv.getTickFrequency()) * 1000
@@ -83,8 +83,8 @@ def vedio_cap():
 			# e.g. if user presses "x" then exit
 			if (key == ord('x')):
 				keep_processing = False
-				print("frame shape: {}. ".format(frame.shape))
-				gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+				print("frame shape: {}. ".format(flip_frame.shape))
+				gray = cv.cvtColor(flip_frame, cv.COLOR_BGR2GRAY)
 				cv.imwrite("E:/Pycharm Projects/Python_OpenCV/pictures/frameGRAY.png", gray)
 				print("-- key == ord('x') --")
 		
