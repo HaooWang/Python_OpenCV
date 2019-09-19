@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2019/6/4 13:55
-# @Author  : HaoWANG
+# @Time    : 2019/6/11 6:42 PM
+# @Author  : HaoWang
 # @Site    : 
-# @File    : 05.ROI.py
+# @File    : 6.blur.py
 # @Software: PyCharm
-
 
 import math
 import sys
@@ -58,43 +57,23 @@ def vedio_cap():
 
 
 def get_image_info(image):
+    print(image.shape[:2])
     print(image.shape)
     print(type(image))
     print(image.size)
 
-def file_color(img):
-    copyImg = img.copy()
-    h, w =img.shape[:2]
-    mask = np.zeros([h+2, w+2], np.uint8)
-    cv.floodFill(copyImg,mask,(30,30),(0,255,255),(100,100,100),(50,50,50),cv.FLOODFILL_FIXED_RANGE)
-    cv.imshow("File_color", copyImg)
-
-def fill_binary():
-    image = np.zeros([200,200,3],np.uint8)
-    image[100:200,100:200,:] =255
-    cv.imshow("Img",image)
-
-    mask = np.ones([202,202,1], np.uint8)
-    mask[101:201,101:201] = 0
-    cv.floodFill(image, mask,(150,100),(0,0,255),cv.FLOODFILL_FIXED_RANGE)
-    cv.imshow("T",image)
 
 print("--------- Information ------")
-src = cv.imread("/Users/haowang/Desktop/image_dataset/misc/4.1.04.tiff")
+src = cv.imread("/Users/haowang/ML_CV_Py_worksapce/Python_OpenCV/pictures/rice.png")
 cv.namedWindow("Input Image", cv.WINDOW_NORMAL)
-cv.imshow("Input Image", src)
+cv.namedWindow("medianBlur - kernel(5,5)", cv.WINDOW_NORMAL)
+cv.filter
+img = cv.medianBlur(src,5)  # 中值滤波，去噪
 
 get_image_info(src)
 
-roi = src[40:180, 100:210]   # （height，wide）---行起始位置60：180，列起始位置100：200
-cv.imshow("ROI", roi)
-
-roi_gray = cv.cvtColor(roi, cv.COLOR_BGR2GRAY)
-back = cv.cvtColor(roi_gray, cv.COLOR_GRAY2BGR)
-src[40:180, 100:210] = back
-cv.imshow("GRAY", src)
-#file_color(src)
-fill_binary()
+cv.imshow("Input Image", src)
+cv.imshow("medianBlur - kernel(5,5)", img)
 cv.waitKey(0)
 
 # destroy all windows
