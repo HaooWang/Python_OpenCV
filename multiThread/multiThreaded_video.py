@@ -27,9 +27,8 @@ import time
 VIDEO_SOURCE = 0
 
 # 创建对象
-# 对于SIFT\SURF算子，可以通过nFeatures属性控制特征点数量
+# 对于SIFT算子，可以通过nFeatures属性控制特征点数量
 SIFT = cv.xfeatures2d_SIFT.create()
-SURF = cv.xfeatures2d_SURF.create()
 
 
 def process_frame1(frame):
@@ -43,24 +42,15 @@ def process_frame1(frame):
 
  # some intensive computation...
 #  SIFT Feature extraction via opencv- python
-def process_frame_sift(src):
-    frame = cv.flip(src,-1) # flip the video frame
+def process_frame(src):
+    # frame = cv.flip(src,0) # flip the video frame
     # 新建一个空图像用于绘制特征点
     img_sift = np.zeros(src.shape, np.uint8)
     # 提取特征并计算描述子
-    kps, des = cv.xfeatures2d_SIFT.detectAndCompute(SIFT, frame, None)
+    kps, des = cv.xfeatures2d_SIFT.detectAndCompute(SIFT, src, None)
     cv.drawKeypoints(frame, kps, img_sift)
-    
     return img_sift
 
-
-def process_frame_surf(src):
-    frame = cv.flip(src,-1);
-    img_surf = np.zeros(src.shape,np.uint8)
-    kps, des = cv.xfeatures2d_SURF.detectAndCompute(SURF,frame,None)
-    cv.drawKeypoints(frame, kps, img_surf)
-
-    return  img_surf
 
 if __name__ == '__main__':
     # Setup.
@@ -83,7 +73,7 @@ if __name__ == '__main__':
         if len(pending_task) < thread_num:
             frame_got, frame = cap.read()
             if frame_got:
-                task = pool.apply_async(process_frame_surf, (frame.copy(),))
+                task = pool.apply_async(process_frame, (frame.copy(),))
                 pending_task.append(task)
                 
         # End time
@@ -94,7 +84,7 @@ if __name__ == '__main__':
         # Calculate frames per second
         # fps = 1 / seconds
         # print("Estimated frames per second : {0}".format(fps))
-        #
+        
         
         # Write FPS on live video
         # text = "FPS:" + str(fps)

@@ -57,7 +57,7 @@ def vedio_cap():
 
 
 def get_image_info(image):
-    print(image.shape[:2])
+    # print(image.shape[:2])
     print(image.shape)
     print(type(image))
     print(image.size)
@@ -67,12 +67,11 @@ print("--------- Information ------")
 src = cv.imread("/Users/haowang/ML_CV_Py_worksapce/Python_OpenCV/pictures/rice.png")
 cv.namedWindow("Input Image", cv.WINDOW_NORMAL)
 cv.namedWindow("medianBlur - kernel(5,5)", cv.WINDOW_NORMAL)
-cv.filter
 img = cv.medianBlur(src,5)  # 中值滤波，去噪
 
-get_image_info(src)
+# get_image_info(src)
 
-cv.imshow("Input Image", src)
+# cv.imshow("Input Image", src)
 cv.imshow("medianBlur - kernel(5,5)", img)
 cv.waitKey(0)
 

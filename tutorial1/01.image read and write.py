@@ -64,10 +64,14 @@ def get_image_info(image):
 
 
 print("--------- Information ------")
-src = cv.imread("/Users/haowang/ML_CV_Py_worksapce/Python_OpenCV/pictures/coins.jpg")
-cv.namedWindow("Input Image", cv.WINDOW_AUTOSIZE)
-get_image_info(src)
-# vedio_cap()
+# mac os
+# src = cv.imread("/Users/haowang/ML_CV_Py_worksapce/Python_OpenCV/pictures/coins.jpg")
+# windows
+# src = cv.imread("E:\Pycharm Projects\Python_opencv3\pictures\coins.jpg")
+
+# cv.namedWindow("Input Image", cv.WINDOW_AUTOSIZE)
+# get_image_info(src)
+vedio_cap()
 cv.waitKey(0)
 
 # destroy all windows
