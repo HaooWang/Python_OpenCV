@@ -36,6 +36,10 @@ titles = ['Original Noisy Image','Histogram','Global Thresholding : '+ str(ret1)
           'Original Noisy Image','Histogram',"Otsu's Thresholding : "+str(ret2),
           'Gaussian filtered Image','Histogram',"Otsu's Thresholding : "+str(ret3)]
 
+# 这里使用了pyplot 中画直方图的方法，plt.hist, 要注意的是它的参数是一维数组
+# 所以这里使用了（numpy）ravel 方法，将多维数组转换成一维，也可以使用flatten 方法
+#ndarray.flat 1-D iterator over an array.
+#ndarray.flatten 1-D array copy of the elements of an array in row-major order.
 for i in range(3):
     plt.subplot(3,3,i*3+1),plt.imshow(images[i*3],'gray')
     plt.title(titles[i*3]), plt.xticks([]), plt.yticks([])

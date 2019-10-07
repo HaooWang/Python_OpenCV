@@ -20,10 +20,10 @@ src = cv.imread("../pictures/lena.png")
 
 # drawing lines,circles,rec,eclp, etc.
 # cv.line(image, point1,point2, color, weight)
-dst1 = cv.line(src,(0,0),(512,512),(100,10,0),10)
+dst_2d = cv.line(src,(0,0),(512,512),(100,10,0),10)
 
 # drawing rectangle
-dst2 = cv.rectangle(src,(100,100),(200,200),(190,10,105),thickness=10)
+dst_box = cv.rectangle(src,(100,100),(200,200),(190,10,105),thickness=10)
 
 # drawing circle
 dst = cv.circle(src,(200,200),100,(0,0,255),10)
