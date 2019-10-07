@@ -23,11 +23,11 @@ from matplotlib import pyplot as plt
 img = cv.imread('../pictures/room.jpg')
 
 # define filter kernel
-kernel = np.ones((5,5),np.float32)/25
+kernel = np.ones((7,7),np.float32)/25
 
 dst_2d = cv.filter2D(img,-1,kernel)
 
-dst_g = cv.GaussianBlur(img,(5,5),0)
+dst_g = cv.GaussianBlur(img,(7,7),0)
 
 # .   cv.boxFilter(src, ddepth, ksize)
 #         @param src input image.
@@ -39,18 +39,23 @@ dst_box = cv.boxFilter(img, -1, (5,5))
 # bilateral filter
 dst_bilateral = cv.bilateralFilter(img,16,75,75)
 
+# median filter
+dst_m = cv.medianBlur(img,5)
+
 # change color space fromBGR to RGB
 img = cv.cvtColor(img,cv.COLOR_BGR2RGB)
 dst_g = cv.cvtColor(dst_g,cv.COLOR_BGR2RGB)
 dst_2d = cv.cvtColor(dst_2d,cv.COLOR_BGR2RGB)
 dst_box = cv.cvtColor(dst_box,cv.COLOR_BGR2RGB)
 dst_bilateral = cv.cvtColor(dst_bilateral, cv.COLOR_BGR2RGB)
+dst_m = cv.cvtColor(dst_m, cv.COLOR_BGR2RGB)
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     PSNR_2d = sess.run(psnr(img, dst_2d))
     PSNR_bil = sess.run(psnr(img, dst_bilateral))
     PSNR_Gua = sess.run(psnr(img, dst_g))
+    PSNR_m = sess.run(psnr(img,dst_m))
 
 # plt.subplot(111),plt.imshow(img),plt.title('Original')
 #
@@ -60,13 +65,17 @@ with tf.Session() as sess:
 #
 # plt.xticks([]), plt.yticks([])
 
-# plt.subplot(111),plt.imshow(dst_g),plt.title("Gaussian " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_Gua))
+plt.subplot(111),plt.imshow(dst_g),plt.title("Gaussian " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_Gua))
+
+plt.xticks([]), plt.yticks([])
+
+# plt.subplot(121),plt.imshow(dst_2d),plt.title("2dFilter " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_2d))
 #
 # plt.xticks([]), plt.yticks([])
 
-plt.subplot(111),plt.imshow(dst_2d),plt.title("2dFilter " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_2d))
-
-plt.xticks([]), plt.yticks([])
+# plt.subplot(111),plt.imshow(dst_m),plt.title("medianFilter " + "PSNR : " +str(PSNR_m))
+#
+# plt.xticks([]), plt.yticks([])
 
 plt.show()
 
