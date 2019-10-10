@@ -65,17 +65,17 @@ with tf.Session() as sess:
 #
 # plt.xticks([]), plt.yticks([])
 
-plt.subplot(111),plt.imshow(dst_g),plt.title("Gaussian " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_Gua))
-
-plt.xticks([]), plt.yticks([])
+# plt.subplot(111),plt.imshow(dst_g),plt.title("Gaussian " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_Gua))
+#
+# plt.xticks([]), plt.yticks([])
 
 # plt.subplot(121),plt.imshow(dst_2d),plt.title("2dFilter " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_2d))
 #
 # plt.xticks([]), plt.yticks([])
 
-# plt.subplot(111),plt.imshow(dst_m),plt.title("medianFilter " + "PSNR : " +str(PSNR_m))
-#
-# plt.xticks([]), plt.yticks([])
+plt.subplot(111),plt.imshow(dst_m),plt.title("medianFilter " + "PSNR : " +str(PSNR_m))
+
+plt.xticks([]), plt.yticks([])
 
 plt.show()
 
