@@ -50,12 +50,15 @@ def main():
 
     dst = cv.medianBlur(bina_map, 11)
 
+    # Canny edge detection
+    edge = cv.Canny(dst,80,200)
+
     plt.subplot(131), plt.imshow(src), plt.title("Input Map Image")
     plt.subplot(132), plt.imshow(src_opening), plt.title("Processed Open Image")
     plt.subplot(133), plt.imshow(src_closing), plt.title("Processed Closing Image")
     plt.subplot(231), plt.imshow(map_gray), plt.title("Input Gray Map Image")
     plt.subplot(232), plt.imshow(dst), plt.title("Processed Threshold Image : thred" + str(ret1))
-    plt.subplot(233), plt.imshow(bina_map), plt.title("Processed Binary Image")
+    plt.subplot(233), plt.imshow(edge), plt.title("Processed Canny edge Image")
     plt.xticks([]), plt.yticks([])
 
     plt.show()
