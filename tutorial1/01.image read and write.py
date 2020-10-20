@@ -18,8 +18,7 @@ def vedio_cap():
 	camera_to_use = 0  # 0 if you have one camera, 1 or > 1 otherwise
 	# define video capture object
 	cap = cv.VideoCapture()
-	# define display window name
-	windowName = "Live Camera Input"
+	# define display window name	windowName = "Live Camera Input"
 	# if command line arguments are provided try to read video_name
 	# otherwise default to capture from attached H/W camera
 	
@@ -53,6 +52,7 @@ def vedio_cap():
 				print("-- key == ord('x') --")
 		
 		# close all windows
+
 		cv.destroyWindow(windowName)
 
 

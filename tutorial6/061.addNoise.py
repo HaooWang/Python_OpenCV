@@ -26,6 +26,7 @@
 
 import numpy as np
 import cv2 as cv
+from PSNR import psnr
 import sys
 import random
 
@@ -84,16 +85,22 @@ def main():
 
     # define a GUI Window
     window_name = "Input Image"
-    cv.namedWindow(window_name,cv.WINDOW_NORMAL)
+    cv.namedWindow(window_name,cv.WINDOW_AUTOSIZE)
     cv.imshow(window_name,src)
 
 #     add gaussian noise
     noisy_image = noisy("s&p",src)
     # define a GUI Window
 
-    cv.namedWindow("Noisy Image",cv.WINDOW_NORMAL)
+    cv.namedWindow("Noisy Image",cv.WINDOW_AUTOSIZE)
     cv.imshow("Noisy Image",noisy_image)
+    
+    print("psnr(src, noisy_image): ",
+          psnr(src, noisy_image))
     cv.waitKey(0)
+    
+    # destroy all windows
+    cv.destroyAllWindows()
 
 if __name__ == "__main__":
     main()

@@ -8,7 +8,7 @@
 
 import math
 import sys
-
+from PSNR import psnr
 import cv2 as cv
 import numpy as np
 
@@ -57,23 +57,36 @@ def vedio_cap():
 
 
 def get_image_info(image):
+    # "--------- Information ------"
     # print(image.shape[:2])
-    print(image.shape)
-    print(type(image))
-    print(image.size)
+    print("image.shape: ", image.shape)
+    print("type(image): ", type(image))
+    print("image.size: ", image.size)
+    
 
 
-print("--------- Information ------")
-src = cv.imread("/Users/haowang/ML_CV_Py_worksapce/Python_OpenCV/pictures/rice.png")
-cv.namedWindow("Input Image", cv.WINDOW_NORMAL)
-cv.namedWindow("medianBlur - kernel(5,5)", cv.WINDOW_NORMAL)
-img = cv.medianBlur(src,5)  # 中值滤波，去噪
+def main():
 
-# get_image_info(src)
+    src = cv.imread("../pictures/rice.png") # source image input
+    cv.namedWindow("Input Image", cv.WINDOW_AUTOSIZE)
+    print("--------- Information ------")
+    get_image_info(src)  # iamge info print
+    
+    blur_kernel = 11    # image blur kernel (3,5,7,9,11...)
+    cv.namedWindow("medianBlur",
+                   cv.WINDOW_AUTOSIZE)
+    
+    img = cv.medianBlur(src, blur_kernel)  # 中值滤波，去噪
+    print("psnr(src, img): ", psnr(src, img))
 
-# cv.imshow("Input Image", src)
-cv.imshow("medianBlur - kernel(5,5)", img)
-cv.waitKey(0)
+    cv.imshow("Input Image",
+              src)
+    cv.imshow("medianBlur",
+              img)
+    cv.waitKey(0)
+    
+    # destroy all windows
+    cv.destroyAllWindows()
 
-# destroy all windows
-cv.destroyAllWindows()
+if __name__ == '__main__':
+    main()
