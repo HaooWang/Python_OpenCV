@@ -27,8 +27,8 @@
 import numpy as np
 import cv2 as cv
 from PSNR import psnr
-import sys
-import random
+# import sys
+# import random
 
 
 def noisy(noise_typ, image, var=0.1, mean=0):
