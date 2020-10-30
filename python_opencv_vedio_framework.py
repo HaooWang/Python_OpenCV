@@ -3,7 +3,7 @@
 # @Time    : 2019/5/13 17:22
 # @Author  : HaoWANG
 # @Site    : 
-# @File    : python_opencv框架.py
+# @File    : python_opencv_vedio_framework.py
 # @Software: PyCharm
 
 

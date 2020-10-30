@@ -36,14 +36,26 @@ def vedio_cap():
 			# start a timer (to see how long processing and display takes)
 			start_t = cv.getTickCount()
 			# frame = cv.flip(frame, 1)
+			
+			
 			# color space transform
 			hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
 			
+			#upper and lower thresholds
 			lower_yel = np.array([26, 43, 46])
 			upper_yel = np.array([44, 255, 255])
 			
 			mask = cv.inRange(hsv, lower_yel, upper_yel)
-			res = cv.bitwise_and(frame, frame, mask=mask)
+			img = cv.bitwise_and(frame, frame, mask=mask)
+			
+			# medianBlur 去噪声
+			res = cv.medianBlur(src=img, ksize=5,dst=None)
+			
+			#高斯模糊
+			# res = cv.GaussianBlur(img, (7,7), sigmaX= 0.3)
+			
+			# canny edge detector
+			edges = cv.Canny(res, 50, 150)
 			
 			# display image
 			cv.imshow(windowName, res)

@@ -7,13 +7,16 @@
 # @Software: PyCharm
 
 import cv2 as cv
+from platForm import img_path
 
 e1 = cv.getTickCount()
-img1 = cv.imread("../pictures/lena.png")
-for i in range(3,30,2):
-    img1 = cv.medianBlur(img1,i)
+src = cv.imread("{}/pictures/finger.jpg".format(img_path()))
+
+kernel = 5
+img = cv.medianBlur(src,3)
     
 e2 = cv.getTickCount()
 t = (e2 - e1)/cv.getTickFrequency()
 print( t )
+cv.imshow("Image", img)
 # Result I got is 0.521107655 seconds 

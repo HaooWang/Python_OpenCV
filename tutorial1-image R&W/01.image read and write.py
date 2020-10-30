@@ -13,20 +13,20 @@ import cv2 as cv
 
 
 def vedio_cap():
-	# initialization
+	# camera vedio processing initialization
 	keep_processing = True
 	camera_to_use = 0  # 0 if you have one camera, 1 or > 1 otherwise
+	
 	# define video capture object
 	cap = cv.VideoCapture()
-	# define display window name	windowName = "Live Camera Input"
-	# if command line arguments are provided try to read video_name
-	# otherwise default to capture from attached H/W camera
+	windowName = "Live Camera Input" # define display window name
 	
+	# otherwise default to capture from attached H/W camera
 	if (((len(sys.argv) == 2) and (cap.open(str(sys.argv[1]))))
 			or (cap.open(camera_to_use))):
 		
 		# create window by name (note flags for resizable or not)
-		cv.namedWindow(windowName, cv.WINDOW_NORMAL)
+		cv.namedWindow(windowName, cv.WINDOW_AUTOSIZE)
 		while (keep_processing):
 			# error detection #
 			if (cap.isOpened):

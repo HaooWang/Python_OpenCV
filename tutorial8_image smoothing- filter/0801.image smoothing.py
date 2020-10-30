@@ -61,9 +61,9 @@ with tf.Session() as sess:
 #
 # plt.xticks([]), plt.yticks([])
 
-# plt.subplot(111),plt.imshow(dst_bilateral),plt.title('Bilateral Filter & PSNR:'+str(PSNR_bil))
-#
-# plt.xticks([]), plt.yticks([])
+plt.subplot(111),plt.imshow(dst_bilateral),plt.title('Bilateral Filter & PSNR:'+str(PSNR_bil))
+
+plt.xticks([]), plt.yticks([])
 
 # plt.subplot(111),plt.imshow(dst_g),plt.title("Gaussian " + str(np.shape(kernel))+ "PSNR : " +str(PSNR_Gua))
 #
@@ -73,9 +73,9 @@ with tf.Session() as sess:
 #
 # plt.xticks([]), plt.yticks([])
 
-plt.subplot(111),plt.imshow(dst_m),plt.title("medianFilter " + "PSNR : " +str(PSNR_m))
-
-plt.xticks([]), plt.yticks([])
+# plt.subplot(111),plt.imshow(dst_m),plt.title("medianFilter " + "PSNR : " +str(PSNR_m))
+#
+# plt.xticks([]), plt.yticks([])
 
 plt.show()
 
