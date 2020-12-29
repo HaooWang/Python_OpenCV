@@ -8,9 +8,9 @@
 
 import math
 import sys
-from PSNR import psnr
+from tools.PSNR import psnr
 import cv2 as cv
-import numpy as np
+
 
 def vedio_cap():
     # initialization

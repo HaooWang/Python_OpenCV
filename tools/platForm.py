@@ -21,8 +21,8 @@ def img_path():
         return "/root/"
     elif platform.system() == "Windows":
         if os.path.exists("E:/Pycharm Projects"):
-            print("Workspace Path in Windows is : {}".format(os.path.abspath('.')))
-            return os.path.abspath('.')
+            print("Workspace Path in Windows is : {}".format(os.path.abspath('..')))
+            return os.path.abspath('..')
         else:
             os.makedirs("Workspace Path in Windows E:/Pycharm Projects is not exists.")
     exit()

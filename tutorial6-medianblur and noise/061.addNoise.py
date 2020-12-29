@@ -26,7 +26,7 @@
 
 import numpy as np
 import cv2 as cv
-from PSNR import psnr
+from tools.PSNR import psnr
 # import sys
 # import random
 

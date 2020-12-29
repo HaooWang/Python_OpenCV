@@ -13,7 +13,7 @@
 import numpy as np
 import cv2 as cv
 import tensorflow as tf
-from PSNR import psnr
+from tools.PSNR import psnr
 from matplotlib import pyplot as plt
 
 

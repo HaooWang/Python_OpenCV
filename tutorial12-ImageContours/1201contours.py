@@ -14,7 +14,10 @@
 import numpy as np
 import cv2
 
-im = cv2.imread('pictures/coins.jpg')
+im = cv2.imread('../pictures/coins.jpg')
+# cv2.imshow("Original Image",im)
+
+
 imgray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
 ret, thresh = cv2.threshold(imgray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)

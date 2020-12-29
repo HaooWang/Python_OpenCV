@@ -7,7 +7,7 @@
 # @Software: PyCharm
 
 import cv2 as cv
-from platForm import img_path
+from tools.platForm import img_path
 
 e1 = cv.getTickCount()
 src = cv.imread("{}/pictures/finger.jpg".format(img_path()))

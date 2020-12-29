@@ -62,7 +62,7 @@ cv = np.array([[ 50.,  50.],
 
 plt.plot(cv[:,0],cv[:,1], 'o-', label='Control Points')
 
-file = open("./BslineData.txt",'w')
+file = open("BslineData.txt", 'w')
 
 for d in range(1,6):
     p = bspline(cv,n=100,degree=d,periodic=False)

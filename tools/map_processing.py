@@ -33,7 +33,7 @@ def main():
     kernel = np.ones((13, 13), np.uint8)
     kernel_c = np.ones((19, 19), np.uint8)
 
-    src = cv.imread("pictures/GradMap.jpg")
+    src = cv.imread("../pictures/GradMap.jpg")
 
     src_opening = cv.morphologyEx(src, cv.MORPH_OPEN, kernel)  # 开运算去除噪声和道路特征点
 
