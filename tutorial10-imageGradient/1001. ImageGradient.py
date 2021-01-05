@@ -8,17 +8,17 @@
 
 
 import numpy as np
-import cv2 as cv
+from cv2 import CV_64F, imread, Sobel, Laplacian
 
 from matplotlib import pyplot as plt
 
-img = cv.imread('../pictures/google.png',0)
+img = imread('../pictures/google.png', 0)
 # laplacian gradient
-laplacian = cv.Laplacian(img,cv.CV_64F)
+laplacian = Laplacian(img, CV_64F)
 
 # Sobel gradient of X and Y
-sobelx = cv.Sobel(img,cv.CV_64F,1,0,ksize=11)
-sobely = cv.Sobel(img,cv.CV_64F,0,1,ksize=11)
+sobelx = Sobel(img, CV_64F, 1, 0, ksize=11)
+sobely = Sobel(img, CV_64F, 0, 1, ksize=11)
 
 plt.subplot(2,2,1),plt.imshow(img,cmap = 'gray')
 plt.title('Original'), plt.xticks([]), plt.yticks([])
