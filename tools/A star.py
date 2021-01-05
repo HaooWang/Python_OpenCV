@@ -58,7 +58,22 @@ class A_Star:
     """
 
     # 注意w,h两个参数，如果你修改了地图，需要传入一个正确值或者修改这里的默认参数
-    def __init__(self, s_x, s_y, e_x, e_y, w=60, h=30):
+    def __init__(self,
+                 s_x: object,
+                 s_y: object,
+                 e_x: object,
+                 e_y: object,
+                 w: object = 60,
+                 h: object = 30) -> object:
+        """
+        # A_Star类对象初始化操作
+        :param s_x:
+        :param s_y:
+        :param e_x:
+        :param e_y:
+        :param w:
+        :param h:
+        """
         self.s_x = s_x
         self.s_y = s_y
         self.e_x = e_x
@@ -73,6 +88,9 @@ class A_Star:
 
     # 查找路径的入口函数
     def find_path(self):
+        """
+        :return:
+        """
         # 构建开始节点
         p = Node_Elem(None, self.s_x, self.s_y, 0.0)
         while True:
@@ -93,6 +111,11 @@ class A_Star:
 
     def make_path(self, p):
         # 从结束点回溯到开始点，开始点的parent == None
+        """
+
+        :param p:
+        :return:
+        """
         while p:
             self.path.append((p.x, p.y))
             p = p.parent
@@ -158,6 +181,12 @@ class A_Star:
         return 1.4
 
     def node_in_close(self, node):
+        """
+
+        :param node:
+        :return:
+        """
+
         for i in self.close:
             if node.x == i.x and node.y == i.y:
                 return True
@@ -185,6 +214,7 @@ class A_Star:
 
 #########################################################
 def print_test_map():
+
     """
     打印搜索后的地图
     """
@@ -236,6 +266,9 @@ def tm_to_test_map():
 
 
 def find_path():
+    """"
+    :return:
+    """
     s_x, s_y = get_start_XY()
     e_x, e_y = get_end_XY()
     a_star = A_Star(s_x, s_y, e_x, e_y)
