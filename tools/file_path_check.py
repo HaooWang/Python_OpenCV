@@ -28,7 +28,7 @@ img_path = "../pictures/dog.jpg"
 #     print(img_path + ' ' + 'have problem!')
 #     pass
 
- # 方法2： 使用pathlib模块
+# 方法2： 使用pathlib模块
 # 检查路径是否存在
 
 # path = pathlib.Path(img_path)
@@ -52,6 +52,6 @@ else:
     cv.namedWindow(window_name, cv.WINDOW_AUTOSIZE)
     img_src = cv.imread(img_path)
     lower_reso = cv.pyrDown(img_src)
-    cv.imshow(window_name,lower_reso)
+    cv.imshow(window_name, lower_reso)
     cv.waitKey(0)
-    cv.destroyAllWindows()
+    cv.destroyAllWindows( )

@@ -9,6 +9,6 @@
 import cv2
 import numpy as np
 
-yellow =np.uint8([[[0, 255, 255]]])
-hsv_yellow=cv2.cvtColor(yellow, cv2.COLOR_BGR2HSV)
+yellow = np.uint8([[[0, 255, 255]]])
+hsv_yellow = cv2.cvtColor(yellow, cv2.COLOR_BGR2HSV)
 print("hsv_green:", hsv_yellow)
