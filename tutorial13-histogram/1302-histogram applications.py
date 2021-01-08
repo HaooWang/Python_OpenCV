@@ -16,12 +16,13 @@
 """
 
 import os
+
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
 
 
-def equalHist_demo(image):
+def equal_hist_demo(image):
     """
     直方图均衡化操作
     :param image: 输入为三通道彩色图像
@@ -36,22 +37,22 @@ def equalHist_demo(image):
     cv.imwrite("../pictures/equ_lena.png", dst)
 
     # plot histogram equalization result
-    hist, bins = np.histogram(gray.flatten( ), 256, [0, 256])
-    cdf = hist.cumsum( )
-    cdf_normalized = cdf * float(hist.max( )) / cdf.max( )
+    hist, bins = np.histogram(gray.flatten(), 256, [0, 256])
+    cdf = hist.cumsum()
+    cdf_normalized = cdf * float(hist.max()) / cdf.max()
     cdf_m = np.ma.masked_equal(cdf, 0)
-    cdf_m = (cdf_m - cdf_m.min( )) * 255 / (cdf_m.max( ) - cdf_m.min( ))
+    cdf_m = (cdf_m - cdf_m.min()) * 255 / (cdf_m.max() - cdf_m.min())
     # cdf = np.ma.filled(cdf_m, 0).astype('uint8')
 
     plt.plot(cdf_m, color = 'k')  # plot cdf mask
     plt.plot(cdf_normalized, color = 'b')  # plot normalized cdf
 
-    plt.hist(gray.flatten( ), 256, [0, 256], color = 'r')  # src gray image hist
-    plt.hist(dst.flatten( ), 256, [0, 256], color = 'y')  # dst equalized gray image hist
+    plt.hist(gray.flatten(), 256, [0, 256], color = 'r')  # src gray image hist
+    plt.hist(dst.flatten(), 256, [0, 256], color = 'y')  # dst equalized gray image hist
 
     plt.xlim([0, 256])
     plt.legend(('cdf_m', 'cdf_normalized', 'src histogram', "equalized hist"), loc = 'upper left')
-    plt.show( )
+    plt.show()
 
 
 def clahe_demo(image):
@@ -74,22 +75,22 @@ def clahe_demo(image):
     print("--------Histogram equalization clahe_demo --------")
 
     # plot histogram equalization result
-    hist, bins = np.histogram(gray.flatten( ), 256, [0, 256])
-    cdf = hist.cumsum( )
-    cdf_normalized = cdf * float(hist.max( )) / cdf.max( )
+    hist, bins = np.histogram(gray.flatten(), 256, [0, 256])
+    cdf = hist.cumsum()
+    cdf_normalized = cdf * float(hist.max()) / cdf.max()
     cdf_m = np.ma.masked_equal(cdf, 0)
-    cdf_m = (cdf_m - cdf_m.min( )) * 255 / (cdf_m.max( ) - cdf_m.min( ))
+    cdf_m = (cdf_m - cdf_m.min()) * 255 / (cdf_m.max() - cdf_m.min())
     # cdf = np.ma.filled(cdf_m, 0).astype('uint8')
 
     plt.plot(cdf_m, color = 'k')  # plot cdf mask
     plt.plot(cdf_normalized, color = 'b')  # plot normalized cdf
 
-    plt.hist(gray.flatten( ), 256, [0, 256], color = 'r')  # src gray image hist
-    plt.hist(dst.flatten( ), 256, [0, 256], color = 'y')  # dst equalized gray image hist
+    plt.hist(gray.flatten(), 256, [0, 256], color = 'r')  # src gray image hist
+    plt.hist(dst.flatten(), 256, [0, 256], color = 'y')  # dst equalized gray image hist
 
     plt.xlim([0, 256])
     plt.legend(('cdf_m', 'cdf_normalized', 'src histogram', "equalized hist"), loc = 'upper left')
-    plt.show( )
+    plt.show()
     cv.imshow("clahe_demo", dst)
     cv.imwrite("../pictures/clahe_lena.png", dst)
 
@@ -101,7 +102,7 @@ def create_rgb_hist(image):
     :return:
     """
     h, w, c = image.shape
-    rgbHist = np.zeros([16 * 16 * 16, 1], np.float32)
+    rgb_hist = np.zeros([16 * 16 * 16, 1], np.float32)
     bsize = 256 / 16
     for row in range(h):
         for col in range(w):
@@ -109,8 +110,8 @@ def create_rgb_hist(image):
             g = image[row, col, 1]
             r = image[row, col, 2]
             index = np.int(b / bsize) * 16 * 16 + np.int(g / bsize) * 16 + np.int(r / bsize)
-            rgbHist[np.int(index), 0] = rgbHist[np.int(index), 0] + 1
-    return rgbHist
+            rgb_hist[np.int(index), 0] = rgb_hist[np.int(index), 0] + 1
+    return rgb_hist
 
 
 def hist_compare(image1, image2):
@@ -149,14 +150,20 @@ def main():
         window_name = "Input Image"
         cv.namedWindow(window_name, cv.WINDOW_AUTOSIZE)
         image_lena = cv.imread(img_path)
+
+        # image blur
+        # dst = cv.medianBlur(image_lena,3)
+        dst = cv.GaussianBlur(image_lena, (5, 5), sigmaX = 1.1)
+
         cv.imshow(window_name, image_lena)
+        cv.imshow("GaussianBlur", dst)
 
         # histogram comp
         image1 = cv.imread("../pictures/lena.png")
         image2 = cv.imread("../pictures/lenanoise.png")
 
         #######
-        hist_compare(image1, image2)
+        # hist_compare(image1, image2)
         #######
 
         #######
@@ -167,10 +174,9 @@ def main():
         # equalHist_demo(image_lena)
         #######
 
-
         cv.waitKey(0)
-        cv.destroyAllWindows( )  # destroy all windows
+        cv.destroyAllWindows()  # destroy all windows
 
 
 if __name__ == '__main__':
-    main( )
+    main()
