@@ -11,7 +11,7 @@
 @Email  :   haowanghk@163.com
 
 @Software : Pycharm
-@Version: V1.2
+@Version: V1.3
 
 """
 
