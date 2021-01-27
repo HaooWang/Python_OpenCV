@@ -3,7 +3,7 @@
 """
 @Copyright:  Jihua Lab 2021.
 @File Name   :  1302-histogram applications.py
-@Description:  
+@Description:  彩色图、灰度图直方图统计、直方图绘制、直方图均衡化、直方图对比。
 
 
 @Create Time   :   2021/1/8 0008  8:57
@@ -97,7 +97,6 @@ def clahe_demo(image):
 
 def create_rgb_hist(image):
     """
-
     :param image:
     :return:
     """
