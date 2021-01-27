@@ -25,9 +25,9 @@ class Student(object):
         :param name: 初始化类对象，self、name、score
         :param score:
         '''
-        if(score>=0 and score <=100):
+        if (score >= 0 and score <= 100):
             self.__score = score
-            if isinstance(name,str):
+            if isinstance(name, str):
                 self.__name = name
                 print("----object {} is Initialised --- ".format(self.__name))
             else:
@@ -55,21 +55,24 @@ class Student(object):
 
     def print_info(self):
         print("----Student {} info printing----".format(self.__name))
+        print("{} info {}".format(self.__name, dir(self)))
         print("Name: {}     Score: {}    Grade: {}  "
               .format(self.__name, self.__score, self.get_grade()))
+
 
 def main():
     student_list = []
     lisa = Student('lisa', 93)  # 声明类对象lisa并初始化该对象
     student_list.append(lisa)
-    bear = Student('bear', 75) # 声明类对象bear并初始化该对象
+    bear = Student('bear', 75)  # 声明类对象bear并初始化该对象
     student_list.append(bear)
-    lisa.print_info()           # 打印类对象信息
-    if(bear.set_score(new_score=100) == True):
+    lisa.print_info()  # 打印类对象信息
+    if (bear.set_score(new_score=100) == True):
         print('--set score: {} Success!--'.format(bear.get_score()))
     bear.print_info()
-    for item in student_list:      # 存放类对象的内存空间
+    for item in student_list:  # 存放类对象的内存空间
         print(item)
+
 
 if __name__ == '__main__':
     main()
